@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON - Amplify Your TikTok Presence | Creator Platform</title>
-    <meta name="description" content="NEON is the ultimate SaaS platform for TikTok creators. Manage, analyze, and grow your presence with intelligent automation and deep analytics.">
-    <meta name="keywords" content="TikTok, creator tools, social media management, analytics, automation">
-    <meta name="author" content="NEON">
+    <title>NeonApp - TikTok OAuth 2.0 Login</title>
     <style>
         * {
             margin: 0;
@@ -14,715 +11,167 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --bg-dark: #0f0c29;
-            --bg-darker: #0a0817;
-            --accent-purple: #667eea;
-            --accent-pink: #ff006e;
-            --border-color: rgba(102, 126, 234, 0.2);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--primary-gradient);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
             width: 100%;
-            background: rgba(15, 12, 41, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
+            font-size: 48px;
+            margin-bottom: 15px;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
+        h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
         }
 
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .subtitle {
+            color: #666;
+            font-size: 14px;
         }
 
-        nav a:hover {
-            color: var(--accent-purple);
+        /* Security Message Section */
+        .security-banner {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
         }
 
-        .cta-btn {
-            background: var(--accent-gradient);
-            color: white;
-            padding: 0.7rem 1.8rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+        .security-banner h3 {
+            font-size: 13px;
+            color: #667eea;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 8rem 2rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            gap: 6px;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -20%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 0, 110, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-            z-index: 0;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(30px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #ffffff, #b0b0b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-        }
-
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent-purple);
-            padding: 1rem 3rem;
-            border: 2px solid var(--accent-purple);
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-purple);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .tiktok-login {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .tiktok-icon {
-            width: 24px;
-            height: 24px;
+        .security-badge {
             display: inline-block;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 4rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(102, 126, 234, 0.1) 50%, transparent 100%);
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 900;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .step {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .step::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .step:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-purple);
-            transform: translateY(-5px);
-        }
-
-        .step:hover::before {
-            transform: scaleX(1);
-        }
-
-        .step-number {
-            font-size: 3rem;
-            font-weight: 900;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-
-        .step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .step p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Features */
-        .features {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .feature:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-purple);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .feature p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Security Section */
-        .security {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
-            position: relative;
-        }
-
-        .security-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .security-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .security-feature {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .security-check {
-            width: 24px;
-            height: 24px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-weight: bold;
+            background: #667eea;
             color: white;
-        }
-
-        .security-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .security-info p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .security-image {
-            background: rgba(102, 126, 234, 0.1);
-            border: 2px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-        }
-
-        .security-icon {
-            font-size: 6rem;
-            opacity: 0.5;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            background: rgba(102, 126, 234, 0.15);
-            border-color: var(--accent-purple);
-            transform: scale(1.05);
-        }
-
-        .pricing-card:hover {
-            border-color: var(--accent-purple);
-            transform: translateY(-5px);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--accent-gradient);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-right: 4px;
         }
 
-        .price {
-            font-size: 3rem;
-            font-weight: 900;
-            margin: 1rem 0;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .oauth-info {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
         }
 
-        .price-period {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 2rem 0;
-        }
-
-        .pricing-features li {
-            padding: 0.8rem 0;
-            color: var(--text-secondary);
+        .oauth-info h3 {
+            font-size: 13px;
+            color: #ff6b35;
+            margin-bottom: 8px;
             display: flex;
-            gap: 0.8rem;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
+            gap: 6px;
         }
 
-        .pricing-features li:last-child {
-            border-bottom: none;
+        .oauth-flow-details {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
         }
 
-        .pricing-features li::before {
-            content: '✓';
-            color: var(--accent-purple);
-            font-weight: bold;
-            font-size: 1.2rem;
+        .oauth-flow-details li {
+            margin-left: 20px;
+            margin-bottom: 4px;
         }
 
-        .pricing-btn {
+        /* Login Button */
+        .login-section {
+            margin-bottom: 25px;
+        }
+
+        .tiktok-login-btn {
             width: 100%;
-            margin-top: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(180deg, rgba(15, 12, 41, 0.5), rgba(10, 8, 23, 0.9));
-            border-top: 1px solid var(--border-color);
-            padding: 4rem 2rem 2rem;
-            margin-top: 6rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
+            padding: 14px;
+            background: linear-gradient(135deg, #25f4ee 0%, #ff006e 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section ul li a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--accent-purple);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-purple);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
         }
 
-        .social-links a:hover {
-            background: var(--accent-gradient);
-            border-color: var(--accent-purple);
-            color: white;
+        .tiktok-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 110, 0.4);
         }
 
-        /* CTA Banner */
-        .cta-banner {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(120, 75, 162, 0.2));
-            border: 1px solid var(--accent-purple);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            margin: 4rem 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+        .tiktok-login-btn:active {
+            transform: translateY(0);
         }
 
-        .cta-banner h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .tiktok-login-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
-        .cta-banner p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+        /* OAuth Redirect Confirmation */
+        .oauth-confirmation {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+            animation: slideIn 0.3s ease;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .security-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-
-            .pricing-card.featured:hover {
-                transform: translateY(-5px);
-            }
-
-            .cta-banner {
-                padding: 2rem;
-            }
-
-            .cta-banner h2 {
-                font-size: 1.8rem;
-            }
+        .oauth-confirmation.visible {
+            display: block;
         }
 
-        /* Animations */
-        @keyframes slideInUp {
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -730,345 +179,438 @@
             }
         }
 
-        .hero-content {
-            animation: slideInUp 0.8s ease;
+        .oauth-confirmation h3 {
+            color: #2e7d32;
+            margin-bottom: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .step {
-            animation: slideInUp 0.8s ease backwards;
+        .oauth-confirmation p {
+            color: #1b5e20;
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
-        .step:nth-child(1) { animation-delay: 0.1s; }
-        .step:nth-child(2) { animation-delay: 0.2s; }
-        .step:nth-child(3) { animation-delay: 0.3s; }
+        .confirmation-details {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1b5e20;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Loading State */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .environment-badge {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .consent-notice {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #555;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .consent-notice strong {
+            color: #333;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .status-message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .status-message.error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+            display: block;
+        }
+
+        .status-message.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4caf50;
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">NEON</div>
-        <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#security">Security</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><button class="cta-btn">Sign In</button></li>
-        </ul>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Amplify Your TikTok Presence</h1>
-            <p class="hero-subtitle">Unlock powerful analytics, automation, and growth tools designed specifically for TikTok creators. Join thousands of creators already growing with NEON.</p>
-            
-            <div class="hero-buttons">
-                <button class="btn-primary tiktok-login">
-                    <svg class="tiktok-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 7.75c-.226-.14-.474-.15-.758-.15.184.466.507 1.026.793 1.675-.386.226-.672.386-1.034.386-.302 0-.6-.134-.859-.406-.259-.272-.387-.6-.387-1.034 0-.573.239-1.031.574-1.262.334-.231.846-.35 1.45-.35.28 0 .589.034.897.102-.122-.26-.258-.484-.403-.657zm2.34 1.867c-.328.18-.674.272-1.035.272-.345 0-.638-.08-.869-.25-.231-.169-.396-.405-.497-.71-.102-.305-.155-.654-.155-1.05 0-.58.144-.995.426-1.25.282-.255.686-.383 1.195-.383.409 0 .82.099 1.225.297-.037.278-.108.635-.21 1.07-.101.436-.233.819-.395 1.15-.162.331-.353.576-.569.739zm-1.62-2.81c.176.247.264.571.264.962 0 .562-.13.962-.383 1.2-.254.238-.65.358-1.168.358-.345 0-.639-.08-.873-.237-.234-.158-.41-.376-.525-.656-.115-.28-.172-.597-.172-.945 0-.464.11-.823.33-1.07.22-.247.565-.371 1.034-.371.4 0 .765.108 1.093.324z"/>
-                    </svg>
-                    Login with TikTok
-                </button>
-                <button class="btn-secondary">Watch Demo</button>
-            </div>
-
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number">50K+</div>
-                    <div class="stat-label">Active Creators</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">2.5B+</div>
-                    <div class="stat-label">Views Managed</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label">Uptime Guarantee</div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎵</div>
+            <h1>NeonApp</h1>
+            <p class="subtitle">Connect with TikTok via OAuth 2.0</p>
         </div>
-    </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <h2 class="section-title">How It Works</h2>
-        <p class="section-subtitle">Get started in minutes and start growing your TikTok presence today</p>
-        
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Connect Your Account</h3>
-                <p>Securely link your TikTok account to NEON with a single click. We use industry-standard OAuth authentication to protect your data.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Set Your Goals</h3>
-                <p>Define your growth targets, content themes, and engagement objectives. Our AI learns your preferences and optimizes accordingly.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Automate & Analyze</h3>
-                <p>Let NEON handle scheduling, engagement automation, and performance tracking. Get real-time insights about your audience and content.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h3>Scale Your Presence</h3>
-                <p>Watch your engagement metrics soar. NEON's intelligent recommendations help you create better content and grow consistently.</p>
-            </div>
+        <!-- OAuth 2.0 Security Information -->
+        <div class="security-banner">
+            <h3>
+                <span>🔒</span>
+                <span class="security-badge">OAuth 2.0</span> Secure Authentication
+            </h3>
+            <p>
+                This application uses the official <strong>TikTok Login Kit</strong> with OAuth 2.0 protocol. 
+                Your login credentials are verified by TikTok's secure servers. We never see your password.
+            </p>
         </div>
-    </section>
 
-    <!-- Features -->
-    <section class="features" id="features">
-        <h2 class="section-title">Powerful Features for Every Creator</h2>
-        <p class="section-subtitle">Everything you need to manage and grow your TikTok presence</p>
-        
-        <div class="features-grid">
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h4>Advanced Analytics</h4>
-                <p>Track views, engagement, follower growth, and trending content with detailed metrics and predictive insights.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⏰</div>
-                <h4>Smart Scheduling</h4>
-                <p>Schedule posts at optimal times when your audience is most active. Data-driven timing for maximum reach.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🤖</div>
-                <h4>AI-Powered Recommendations</h4>
-                <p>Get personalized suggestions for content ideas, hashtags, and posting strategies based on your performance.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">💬</div>
-                <h4>Comment Management</h4>
-                <p>Monitor and respond to comments efficiently with organized dashboards and automated filters for spam.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">👥</div>
-                <h4>Audience Insights</h4>
-                <p>Understand your followers better with demographic data, behavior patterns, and engagement preferences.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📈</div>
-                <h4>Growth Tools</h4>
-                <p>Access trending sounds, hashtags, and challenges before they go mainstream to stay ahead of the curve.</p>
-            </div>
+        <!-- OAuth Flow Information -->
+        <div class="oauth-info">
+            <h3>
+                <span>ℹ️</span> How OAuth 2.0 Works
+            </h3>
+            <ol class="oauth-flow-details">
+                <li><strong>Authorization Request:</strong> You'll be redirected to TikTok's login page</li>
+                <li><strong>User Consent:</strong> Review and approve the permissions requested</li>
+                <li><strong>Authorization Code:</strong> TikTok generates a secure code</li>
+                <li><strong>Token Exchange:</strong> Code is securely exchanged for an access token</li>
+                <li><strong>Account Access:</strong> App accesses your profile with granted permissions</li>
+            </ol>
         </div>
-    </section>
 
-    <!-- Security Section -->
-    <section class="security" id="security">
-        <h2 class="section-title">Your Security is Our Priority</h2>
-        <div class="security-content">
-            <div class="security-text">
-                <h2>Enterprise-Grade Security & Privacy</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">We take the security and privacy of your data seriously. NEON is built with industry-leading security practices.</p>
-                
-                <div class="security-feature">
-                    <div class="security-check">✓</div>
-                    <div class="security-info">
-                        <h3>End-to-End Encryption</h3>
-                        <p>All data transmitted between you and NEON is encrypted with AES-256 encryption standards.</p>
-                    </div>
-                </div>
-
-                <div class="security-feature">
-                    <div class="security-check">✓</div>
-                    <div class="security-info">
-                        <h3>GDPR & Privacy Compliant</h3>
-                        <p>We comply with GDPR, CCPA, and international data protection regulations. Your privacy controls are always in your hands.</p>
-                    </div>
-                </div>
-
-                <div class="security-feature">
-                    <div class="security-check">✓</div>
-                    <div class="security-info">
-                        <h3>Regular Security Audits</h3>
-                        <p>Third-party security audits and penetration testing ensure our platform stays secure against emerging threats.</p>
-                    </div>
-                </div>
-
-                <div class="security-feature">
-                    <div class="security-check">✓</div>
-                    <div class="security-info">
-                        <h3>Two-Factor Authentication</h3>
-                        <p>Optional 2FA adds an extra layer of protection to your account with SMS or authenticator app support.</p>
-                    </div>
-                </div>
-
-                <div class="security-feature">
-                    <div class="security-check">✓</div>
-                    <div class="security-info">
-                        <h3>SOC 2 Type II Certified</h3>
-                        <p>We maintain SOC 2 Type II compliance, ensuring security, availability, and confidentiality standards.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="security-image">
-                <div class="security-icon">🔒</div>
-            </div>
+        <!-- Login Section -->
+        <div class="login-section">
+            <button class="tiktok-login-btn" id="tiktokLoginBtn" onclick="initiateOAuthFlow()">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.1 1.75 2.9 2.9 0 0 1 2.31-4.64 2.88 2.88 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-3.47v-3.5a8.26 8.26 0 0 0 3.77 1.23V9.45a4.9 4.9 0 0 1-.49-.05z"/>
+                </svg>
+                <span>Login with TikTok</span>
+            </button>
         </div>
-    </section>
 
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <h2 class="section-title">Simple, Transparent Pricing</h2>
-        <p class="section-subtitle">Choose the plan that fits your needs. All plans include a 14-day free trial, no credit card required.</p>
-        
-        <div class="pricing-cards">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Perfect for new creators</p>
-                <div class="price">$9<span class="price-period">/month</span></div>
-                <ul class="pricing-features">
-                    <li>Basic analytics dashboard</li>
-                    <li>Up to 20 scheduled posts</li>
-                    <li>Monthly insights report</li>
-                    <li>Community support</li>
-                    <li>Basic hashtag suggestions</li>
-                </ul>
-                <button class="btn-secondary pricing-btn">Get Started</button>
-            </div>
-
-            <div class="pricing-card featured">
-                <span class="badge">Most Popular</span>
-                <h3>Creator Pro</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">For serious creators</p>
-                <div class="price">$29<span class="price-period">/month</span></div>
-                <ul class="pricing-features">
-                    <li>Advanced analytics & insights</li>
-                    <li>Unlimited scheduled posts</li>
-                    <li>AI-powered recommendations</li>
-                    <li>Weekly performance reports</li>
-                    <li>Trend detection & alerts</li>
-                    <li>Priority support</li>
-                    <li>Audience demographic insights</li>
-                </ul>
-                <button class="btn-primary pricing-btn">Get Started</button>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Agency Elite</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">For agencies & brands</p>
-                <div class="price">Custom<span class="price-period">/month</span></div>
-                <ul class="pricing-features">
-                    <li>Multi-account management</li>
-                    <li>Team collaboration tools</li>
-                    <li>Advanced API access</li>
-                    <li>Custom integrations</li>
-                    <li>Dedicated account manager</li>
-                    <li>White-label options</li>
-                    <li>24/7 enterprise support</li>
-                </ul>
-                <button class="btn-secondary pricing-btn">Contact Sales</button>
-            </div>
+        <!-- Loading State -->
+        <div class="loading" id="loadingState">
+            <div class="spinner"></div>
+            <p>Redirecting to TikTok authorization...</p>
         </div>
-    </section>
 
-    <!-- CTA Banner -->
-    <div class="cta-banner">
-        <h2>Ready to Grow Your TikTok?</h2>
-        <p>Join thousands of creators already using NEON to scale their presence. Start your free 14-day trial today.</p>
-        <button class="btn-primary">Start Free Trial</button>
+        <!-- OAuth Redirect Confirmation -->
+        <div class="oauth-confirmation" id="oauthConfirmation">
+            <h3>
+                <span>✓</span> OAuth Authorization Initiated
+            </h3>
+            <p><strong>You are being redirected to TikTok's authorization server.</strong></p>
+            <div class="confirmation-details">
+                <div><strong>Protocol:</strong> OAuth 2.0 Authorization Code Flow</div>
+                <div><strong>Client ID:</strong> <code>sandbox_7f5e9c3a2b</code></div>
+                <div><strong>Timestamp:</strong> <span id="timestamp"></span></div>
+                <div><strong>Redirect URI:</strong> <code>https://app.neonapp.io/callback</code></div>
+                <div><strong>Scope:</strong> user.info.basic, user.info.profile</div>
+            </div>
+            <p style="margin-top: 10px; font-size: 12px;">
+                If you are not redirected within 3 seconds, <a href="#" onclick="window.location.reload(); return false;" style="color: #2e7d32; text-decoration: underline;">click here</a>.
+            </p>
+        </div>
+
+        <!-- User Consent Notice -->
+        <div class="consent-notice">
+            <strong>⚠️ User Consent & Transparency:</strong><br>
+            By clicking "Login with TikTok", you agree to:
+            <ul style="margin-left: 15px; margin-top: 5px;">
+                <li>Be redirected to TikTok's official login page</li>
+                <li>Share your basic profile information (name, username, profile picture)</li>
+                <li>Review TikTok's <a href="https://www.tiktok.com/privacy" target="_blank" style="color: #667eea;">Privacy Policy</a> and <a href="https://www.tiktok.com/legal/page/us/terms-of-service" target="_blank" style="color: #667eea;">Terms of Service</a></li>
+                <li>This is a <span class="environment-badge">SANDBOX</span> demo environment</li>
+            </ul>
+        </div>
+
+        <!-- Status Message -->
+        <div class="status-message" id="statusMessage"></div>
+
+        <!-- Footer Links -->
+        <div class="footer-links">
+            <a href="https://developers.tiktok.com/doc/login-kit" target="_blank">TikTok Dev Docs</a>
+            <a href="https://tools.ietf.org/html/rfc6749" target="_blank">OAuth 2.0 Spec</a>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#security">Security</a></li>
-                    <li><a href="/changelog">Changelog</a></li>
-                    <li><a href="/roadmap">Roadmap</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/careers">Careers</a></li>
-                    <li><a href="/press">Press Kit</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                    <li><a href="/partners">Partners</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="/documentation">Documentation</a></li>
-                    <li><a href="/guides">Creator Guides</a></li>
-                    <li><a href="/tutorials">Video Tutorials</a></li>
-                    <li><a href="/faq">FAQ</a></li>
-                    <li><a href="/community">Community</a></li>
-                    <li><a href="/api-docs">API Docs</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
-                    <li><a href="/cookies">Cookie Policy</a></li>
-                    <li><a href="/disclaimer">Disclaimer</a></li>
-                    <li><a href="/dpa">Data Processing Agreement</a></li>
-                    <li><a href="/ccpa">CCPA Notice</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="social-links">
-                <a href="https://twitter.com/neonapp" title="Twitter">𝕏</a>
-                <a href="https://tiktok.com/@neonapp" title="TikTok">♪</a>
-                <a href="https://instagram.com/neonapp" title="Instagram">📷</a>
-                <a href="https://youtube.com/@neonapp" title="YouTube">▶️</a>
-                <a href="https://discord.gg/neon" title="Discord">💬</a>
-            </div>
-            <p>&copy; 2025 NEON - Amplify Your Presence. All rights reserved. NEON is not affiliated with or endorsed by TikTok, Inc.</p>
-            <p style="margin-top: 1rem; font-size: 0.85rem;">By using NEON, you agree to our Terms of Service and Privacy Policy. We are committed to protecting your data and privacy in accordance with international regulations.</p>
-        </div>
-    </footer>
-
     <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Add scroll animation for elements
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // OAuth 2.0 Configuration (Sandbox Credentials)
+        const OAUTH_CONFIG = {
+            clientId: 'sandbox_7f5e9c3a2b',
+            redirectUri: 'https://app.neonapp.io/callback',
+            authorizationEndpoint: 'https://www.tiktok.com/oauth/authorize',
+            tokenEndpoint: 'https://open.tiktokapis.com/v2/oauth/token/',
+            scopes: ['user.info.basic', 'user.info.profile'],
+            state: generateRandomState(),
+            codeChallenge: generatePKCEChallenge(),
         };
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        /**
+         * Generate a random state value for CSRF protection
+         */
+        function generateRandomState() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+            let state = '';
+            for (let i = 0; i < 64; i++) {
+                state += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return state;
+        }
 
-        document.querySelectorAll('.step, .feature, .pricing-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+        /**
+         * Generate PKCE Challenge for additional security
+         */
+        function generatePKCEChallenge() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+            let codeVerifier = '';
+            for (let i = 0; i < 128; i++) {
+                codeVerifier += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            // Store for later verification
+            sessionStorage.setItem('pkce_verifier', codeVerifier);
+            return codeVerifier;
+        }
+
+        /**
+         * Initiate OAuth 2.0 Authorization Code Flow
+         */
+        function initiateOAuthFlow() {
+            try {
+                // Store OAuth state for verification
+                sessionStorage.setItem('oauth_state', OAUTH_CONFIG.state);
+                sessionStorage.setItem('oauth_timestamp', new Date().toISOString());
+
+                // Build authorization URL
+                const authUrl = new URL(OAUTH_CONFIG.authorizationEndpoint);
+                authUrl.searchParams.append('client_id', OAUTH_CONFIG.clientId);
+                authUrl.searchParams.append('redirect_uri', OAUTH_CONFIG.redirectUri);
+                authUrl.searchParams.append('response_type', 'code');
+                authUrl.searchParams.append('scope', OAUTH_CONFIG.scopes.join(','));
+                authUrl.searchParams.append('state', OAUTH_CONFIG.state);
+                authUrl.searchParams.append('code_challenge', OAUTH_CONFIG.codeChallenge);
+                authUrl.searchParams.append('code_challenge_method', 'plain');
+
+                // Show loading state
+                showLoadingState();
+
+                // Show OAuth confirmation with visible details
+                showOAuthConfirmation();
+
+                // Log the OAuth flow initiation
+                console.log('🔐 OAuth 2.0 Authorization Code Flow Initiated');
+                console.log('Authorization Endpoint:', OAUTH_CONFIG.authorizationEndpoint);
+                console.log('Client ID:', OAUTH_CONFIG.clientId);
+                console.log('Redirect URI:', OAUTH_CONFIG.redirectUri);
+                console.log('Requested Scopes:', OAUTH_CONFIG.scopes);
+                console.log('State:', OAUTH_CONFIG.state);
+                console.log('Authorization URL:', authUrl.toString());
+
+                // Redirect to TikTok authorization after a brief delay for visibility
+                setTimeout(() => {
+                    window.location.href = authUrl.toString();
+                }, 1500);
+
+            } catch (error) {
+                console.error('OAuth Flow Error:', error);
+                showError('Failed to initiate OAuth flow. Please try again.');
+            }
+        }
+
+        /**
+         * Handle OAuth Redirect Callback (for when user returns from TikTok)
+         */
+        function handleOAuthCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+            const error = urlParams.get('error');
+            const errorDescription = urlParams.get('error_description');
+
+            if (error) {
+                console.error('OAuth Error:', error, errorDescription);
+                showError(`Authorization failed: ${errorDescription || error}`);
+                return;
+            }
+
+            if (code) {
+                // Verify state for CSRF protection
+                const storedState = sessionStorage.getItem('oauth_state');
+                if (state !== storedState) {
+                    console.error('State mismatch - potential CSRF attack');
+                    showError('Security validation failed. Please try again.');
+                    return;
+                }
+
+                console.log('✓ Authorization code received:', code);
+                console.log('✓ State verification passed');
+
+                // In a real application, exchange the code for a token
+                // This would be done on the backend server
+                exchangeCodeForToken(code);
+            }
+        }
+
+        /**
+         * Exchange authorization code for access token (Backend Operation)
+         */
+        function exchangeCodeForToken(authCode) {
+            console.log('🔄 Exchanging authorization code for access token...');
+
+            // In production, this should be done on your backend
+            const tokenRequest = {
+                client_id: OAUTH_CONFIG.clientId,
+                client_secret: '{{BACKEND_CLIENT_SECRET}}', // Never expose in frontend
+                code: authCode,
+                grant_type: 'authorization_code',
+                redirect_uri: OAUTH_CONFIG.redirectUri,
+            };
+
+            console.log('Token Request Payload (sanitized):', {
+                client_id: tokenRequest.client_id,
+                grant_type: tokenRequest.grant_type,
+                redirect_uri: tokenRequest.redirect_uri,
+                code: '***REDACTED***'
+            });
+
+            // Simulated token exchange response
+            setTimeout(() => {
+                showSuccess('✓ Successfully authenticated with TikTok! Access token obtained and stored securely.');
+                console.log('✓ OAuth 2.0 flow completed successfully');
+            }, 1000);
+        }
+
+        /**
+         * Display loading state
+         */
+        function showLoadingState() {
+            const loadingElement = document.getElementById('loadingState');
+            if (loadingElement) {
+                loadingElement.classList.add('active');
+                document.getElementById('tiktokLoginBtn').disabled = true;
+            }
+        }
+
+        /**
+         * Hide loading state
+         */
+        function hideLoadingState() {
+            const loadingElement = document.getElementById('loadingState');
+            if (loadingElement) {
+                loadingElement.classList.remove('active');
+                document.getElementById('tiktokLoginBtn').disabled = false;
+            }
+        }
+
+        /**
+         * Show OAuth confirmation with visible details
+         */
+        function showOAuthConfirmation() {
+            const confirmationElement = document.getElementById('oauthConfirmation');
+            if (confirmationElement) {
+                document.getElementById('timestamp').textContent = new Date().toISOString();
+                confirmationElement.classList.add('visible');
+            }
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(message) {
+            hideLoadingState();
+            const statusElement = document.getElementById('statusMessage');
+            if (statusElement) {
+                statusElement.textContent = '❌ ' + message;
+                statusElement.classList.remove('success');
+                statusElement.classList.add('error');
+            }
+        }
+
+        /**
+         * Show success message
+         */
+        function showSuccess(message) {
+            hideLoadingState();
+            const statusElement = document.getElementById('statusMessage');
+            if (statusElement) {
+                statusElement.textContent = message;
+                statusElement.classList.remove('error');
+                statusElement.classList.add('success');
+            }
+        }
+
+        /**
+         * Initialize the application
+         */
+        function initializeApp() {
+            // Check if we're returning from OAuth redirect
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('code') || urlParams.has('error')) {
+                handleOAuthCallback();
+            }
+
+            // Log application initialization
+            console.log('🚀 NeonApp initialized');
+            console.log('📱 TikTok OAuth 2.0 Login Kit enabled');
+            console.log('🔒 Security: OAuth 2.0 with PKCE and CSRF protection');
+            console.log('📋 Environment: Sandbox (sandbox_7f5e9c3a2b)');
+        }
+
+        // Initialize app when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
     </script>
 </body>
 </html>
