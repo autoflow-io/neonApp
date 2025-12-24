@@ -1,7 +1,5 @@
 # Terms of Service
 
-tiktok-developers-site-verification=98q14UO2ZQMjFSYa3eYykxRxtaGMmxOj
-
 By using neonApp, you agree to the following terms:
 
 ## Service Description
