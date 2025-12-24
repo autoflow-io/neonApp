@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>neonApp Demo</title>
+</head>
+<body>
+  <h1>neonApp – TikTok Upload Demo</h1>
+
+  <p>This demo shows TikTok Login and Content Posting API usage.</p>
+
+  <button onclick="login()">Login with TikTok</button>
+  <br><br>
+
+  <input type="file" id="video" accept="video/mp4" />
+  <br><br>
+
+  <button onclick="upload()">Upload to TikTok</button>
+
+  <script>
+    function login() {
+      alert("Redirecting to TikTok OAuth (demo)");
+      window.location.href = "https://www.tiktok.com/v2/auth/authorize";
+    }
+
+    function upload() {
+      alert("Uploading video via TikTok Content Posting API (demo)");
+    }
+  </script>
+</body>
+</html>
