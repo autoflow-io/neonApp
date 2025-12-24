@@ -1,6 +1,7 @@
 # Privacy Policy
 
 Effective Date: 2025-01-01
+tiktok-developers-site-verification=98q14UO2ZQMjFSYa3eYykxRxtaGMmxOj
 
 This application ("neonApp") uses TikTok for Developers APIs to allow users to upload and publish video content to their own TikTok accounts.
 
