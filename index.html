@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>neonApp Demo</title>
+  <meta charset="UTF-8" />
+  <title>NEON – TikTok Automation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>neonApp – TikTok Upload Demo</h1>
 
-  <p>This demo shows TikTok Login and Content Posting API usage.</p>
+  <main class="container">
+    <h1>NEON</h1>
+    <p class="subtitle">
+      Log in with TikTok and publish short videos using official TikTok APIs.
+    </p>
 
-  <button onclick="login()">Login with TikTok</button>
-  <br><br>
+    <button id="loginBtn">Login with TikTok</button>
 
-  <input type="file" id="video" accept="video/mp4" />
-  <br><br>
+    <div id="result" class="hidden">
+      <h3>Authorization Successful</h3>
+      <p><strong>Authorization Code:</strong></p>
+      <code id="authCode"></code>
+      <p class="note">
+        This code will be exchanged server-side for an access token.
+      </p>
+    </div>
 
-  <button onclick="upload()">Upload to TikTok</button>
+    <footer>
+      <a href="privacy-policy" target="_blank">Privacy Policy</a> |
+      <a href="terms-of-service" target="_blank">Terms of Service</a>
+    </footer>
+  </main>
 
-  <script>
-    function login() {
-      alert("Redirecting to TikTok OAuth (demo)");
-      window.location.href = "https://www.tiktok.com/v2/auth/authorize";
-    }
-
-    function upload() {
-      alert("Uploading video via TikTok Content Posting API (demo)");
-    }
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
