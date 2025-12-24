@@ -23,4 +23,4 @@ Users may revoke access at any time from their TikTok account settings.
 
 ## Contact
 For questions, contact:
-support@yourdomain.com
+support@masofttech.com
