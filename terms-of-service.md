@@ -16,4 +16,4 @@ The service is provided "as is" without warranties of any kind.
 Users may revoke access at any time via their TikTok account.
 
 ## Contact
-support@yourdomain.com
+support@masofttech.com
